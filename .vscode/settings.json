@@ -1,0 +1,21 @@
+{
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed"
+  ],
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[c]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
+}

@@ -1,0 +1,66 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "minor": 4,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Debug (clang++)",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release (clang++)",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "tsan",
+            "displayName": "Debug + ThreadSanitizer",
+            "inherits": "default",
+            "binaryDir": "${sourceDir}/build-tsan",
+            "cacheVariables": {
+                "ENABLE_TSAN": "ON"
+            }
+        },
+        {
+            "name": "asan",
+            "displayName": "Debug + ASan/UBSan",
+            "inherits": "default",
+            "binaryDir": "${sourceDir}/build-asan",
+            "cacheVariables": {
+                "ENABLE_ASAN": "ON",
+                "ENABLE_UBSAN": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release"
+        },
+        {
+            "name": "tsan",
+            "configurePreset": "tsan"
+        },
+        {
+            "name": "asan",
+            "configurePreset": "asan"
+        }
+    ]
+}

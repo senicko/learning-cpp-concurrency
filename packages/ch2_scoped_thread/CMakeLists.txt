@@ -1,0 +1,1 @@
+add_subprogram(ch2_scoped_thread)
