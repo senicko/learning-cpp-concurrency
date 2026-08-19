@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 
-// NOTE: Master thread pattern (snippet, not full code)
+// Master thread pattern (snippet, not full code)
 // =======================================================
 // std::thread::id master_thread;
 
@@ -41,16 +41,16 @@ T parallel_accumulate(Iterator first, Iterator last, T init)
     unsigned long const min_per_thread = 25;
     unsigned long const hardware_threads = std::thread::hardware_concurrency();
 
-    // NOTE: This is integer way of ceil(length / min_per_thread).
+    // This is integer way of ceil(length / min_per_thread).
     unsigned long const max_threads
         = (length + min_per_thread - 1) / min_per_thread;
-    // NOTE: Take minimum from what computer can handle and max_threads. If we
+    //  Take minimum from what computer can handle and max_threads. If we
     // don't know how many cores our machine has limit them to 2.
     unsigned long const num_threads
         = std::min(hardware_threads != 0 ? hardware_threads : 2, max_threads);
     unsigned long const block_size = length / num_threads;
 
-    // NOTE: We are allocating num_threads-1 so that we can reuse current thread
+    // We are allocating num_threads-1 so that we can reuse current thread
     // too.
     std::vector<std::thread> threads(num_threads - 1);
     std::vector<T> results(num_threads);
@@ -61,7 +61,7 @@ T parallel_accumulate(Iterator first, Iterator last, T init)
         Iterator block_end = block_start;
         std::advance(block_end, block_size);
 
-        // NOTE: We need to pass std::ref to results[i] as threads can't return
+        // We need to pass std::ref to results[i] as threads can't return
         // values. Also std::ref is required because thread passes arguments as
         // rvalues, so only const T& is possible otherwise.
         threads[i] = std::thread(accumulate_block<Iterator, T>(), block_start,
@@ -96,7 +96,7 @@ struct func {
     }
 };
 
-// NOTE: As oc c++20 there is std::jthread which kind of does what this
+// As oc c++20 there is std::jthread which kind of does what this
 // joining_thread class do
 class joining_thread {
     std::thread t;

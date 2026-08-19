@@ -22,7 +22,7 @@ void thread_move_example()
 
     t3 = std::move(t2);
 
-    // NOTE: This will crash as t1 is still managing a thread.
+    // This will crash as t1 is still managing a thread.
     // t1 = std::move(t3);
 }
 
@@ -39,13 +39,13 @@ struct BigObject {
 
 void process_big_object(std::unique_ptr<BigObject> big_object)
 {
-    std::cout << big_object->title << "\n"
-              << big_object->body << "\n";
+    std::cout << big_object->title << "\n" << big_object->body << "\n";
 }
 
 void handle_big_object()
 {
-    std::unique_ptr<BigObject> b = std::make_unique<BigObject>("Book Title", "Book Contents");
+    std::unique_ptr<BigObject> b
+        = std::make_unique<BigObject>("Book Title", "Book Contents");
 
     std::thread t(process_big_object, std::move(b));
 
