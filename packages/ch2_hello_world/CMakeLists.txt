@@ -1,1 +1,0 @@
-add_subprogram(ch2_hello_world)

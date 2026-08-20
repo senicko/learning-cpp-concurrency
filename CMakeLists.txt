@@ -15,7 +15,7 @@ include(Sanitizers)
 
 find_package(Threads REQUIRED)
 
-file(GLOB subprogram_dirs CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/packages/*")
+file(GLOB subprogram_dirs CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/packages/*/*")
 
 foreach(dir IN LISTS subprogram_dirs)
     if(IS_DIRECTORY "${dir}" AND EXISTS "${dir}/CMakeLists.txt")

@@ -1,18 +1,26 @@
-# add_subprogram(<name>)
+# add_subprogram([<name>])
 #
-# Call from src/<name>/CMakeLists.txt. Expected layout:
+# Call from packages/<chapter>/<name>/CMakeLists.txt. Expected layout:
 #
-#   src/<name>/
-#     CMakeLists.txt          # add_subprogram(<name>)
+#   packages/<chapter>/<name>/
+#     CMakeLists.txt          # add_subprogram()  (name defaults to directory)
 #     include/<name>/...      # public headers
 #     src/main.cpp            # required entry point
 #     src/*.cpp               # other sources
+#
+# Target names must be unique across chapters.
 #
 # Builds:
 #   <name>         executable  (cmake --build build --target <name>)
 #   run-<name>     build+run   (cmake --build build --target run-<name>)
 
-function(add_subprogram name)
+function(add_subprogram)
+    if(ARGC GREATER 0)
+        set(name "${ARGV0}")
+    else()
+        get_filename_component(name "${CMAKE_CURRENT_SOURCE_DIR}" NAME)
+    endif()
+
     set(prog_dir "${CMAKE_CURRENT_SOURCE_DIR}")
     set(include_dir "${prog_dir}/include")
     set(src_dir "${prog_dir}/src")
