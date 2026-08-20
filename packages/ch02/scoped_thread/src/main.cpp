@@ -96,7 +96,7 @@ struct func {
     }
 };
 
-// As oc c++20 there is std::jthread which kind of does what this
+// As of c++20 there is std::jthread which kind of does what this
 // joining_thread class do
 class joining_thread {
     std::thread t;

@@ -16,8 +16,11 @@ void foo()
     for (unsigned i = 0; i < thread_count; ++i) {
         threads.push_back(std::async(std::launch::async, [&, i] {
             data[i] = { };
-            std::cout << "doing more stuff\n" << std::flush;
             done.count_down();
+
+            // We are using latch because of this. Latch helps us synchronize
+            // data preparation, but firther processing can be done in parallel.
+            std::cout << "doing more stuff\n" << std::flush;
         }));
     }
 
